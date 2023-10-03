@@ -16,13 +16,28 @@ def sigmoid(self, x: float) -> float:
 class Neuron:
     activation_function = sigmoid
 
-    def __init__(self, weights: list[float], parent_layer: list):
-        self.weights = [1-(2*rand.random()) for neuron in parent_layer]
+    def __init__(self, parent_layer: list):
+        self.weights = [1-(2*rand.random()) for i in range(len(parent_layer)+1)]
         self.parent_layer = parent_layer
         self.activation = 0
+        self.gradient = [0]*len(self.weights)
 
     def update(self):
         self.activation = dot_product(self.parent_layer(), self.weights)
 
     def __call__(self) -> float:
         return self.activation
+
+    def update_gradient(self, cost, d=2**(-16)):
+        for i in len(self.weights):
+            c0 = cost()
+            self.weights[i] += d
+            c1 = cost()
+            self.weights[i] -= 2*d
+            c2 = cost()
+            self.weights[i] += d
+            self.gradient[i] = ((c1-c0)-(c2-c0)) / (2*d)
+
+    def descend(self, step):
+        for i in range(len(self.weights)):
+            self.weight[i] -= self.gradient * step

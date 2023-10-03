@@ -6,7 +6,7 @@ class Neural_Net:
         self.layers = [Input_Layer(input_parser, input_parser_output_size)]
         for i in range(layer_count-1):
             self.layers.append(Layer(layer_size, self.layers[-1]))
-        self.cost = cost_function
+        self.cost_function = cost_function
 
     def __iter__(self):
         return self.layers
@@ -17,6 +17,17 @@ class Neural_Net:
             layer.update()
         return self[-1]()[:-1]
     
-    def cost_gradient(self, v):
-        def delta_cost(v, dv):
-            return self.cost(v[i]+ dv[i] for i in range(len(v)))
+    def update_gradient(self, input, d):
+        def cost():
+            return self.cost_function(input, self(input))
+        for layer in self:
+            layer.update_gradient(cost, d)
+
+    def descend(self, step):
+        for layer in self:
+            layer.descend(step)
+
+    def epoch(self, training_data, d=2**(-16), step=2**(-8)):
+        for input in training_data:
+            self.update_gradient(self, input, d)
+            self.descend(self, step)

@@ -31,3 +31,11 @@ class Input_Layer(Layer):
     
     def __call__(self) -> list[float]:
         return self.activations + [-1]
+    
+    def update_gradient(self, cost, d):
+        for neuron in self:
+            neuron.update_gradient(cost, d)
+
+    def descend(self, step):
+        for neuron in self:
+            neuron.descend(step)
