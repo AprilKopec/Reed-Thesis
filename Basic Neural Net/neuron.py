@@ -19,7 +19,10 @@ class Neuron:
     def __init__(self, weights: list[float], parent_layer: list):
         self.weights = [1-(2*rand.random()) for neuron in parent_layer]
         self.parent_layer = parent_layer
+        self.activation = 0
 
-    def __call__(self, activations) -> float:
-        x = dot_product(activations, self.weights)
-        return self.activation_function(x)
+    def update(self):
+        self.activation = dot_product(self.parent_layer(), self.weights)
+
+    def __call__(self) -> float:
+        return self.activation

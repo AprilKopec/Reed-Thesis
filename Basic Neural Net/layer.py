@@ -8,8 +8,12 @@ class Layer:
     def __iter__(self) -> list[Neuron]:
         return self.neurons
     
-    def __call__(self, input) -> list[float]:
-        return [neuron(input) for neuron in self] + [-1]
+    def update(self):
+        for neuron in self:
+            neuron.update()
+
+    def __call__(self) -> list[float]:
+        return [neuron() for neuron in self] + [-1]
 
 
 class Input_Layer(Layer):
@@ -19,7 +23,11 @@ class Input_Layer(Layer):
     
     # This is kind of cursed but like what else could this possibly return
     def __iter__(self):
-        return [lambda input: self(input)[i] for i in range(self.size)]
+        return [lambda input: self.update(input)[i] for i in range(self.size)]
     
-    def __call__(self, input) -> list[float]:
-        return self.input_parser(input) + [-1]
+    def update(self, input):
+        self.activations = self.input_parser(input)
+        return self.activations
+    
+    def __call__(self) -> list[float]:
+        return self.activations + [-1]
