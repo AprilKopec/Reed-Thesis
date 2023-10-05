@@ -27,7 +27,7 @@ class Neural_Net:
         for layer in self:
             layer.descend(step)
 
-    def epoch(self, training_data, d=2**(-16), step=2**(-8)):
+    def epoch(self, training_data, d=2**(-8), step=2**(-8)):
         for input in training_data:
             self.update_gradient(self, input, d)
             self.descend(self, step)
