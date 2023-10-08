@@ -6,10 +6,10 @@ def dot_product(u, v):
     return sum([u[i] * v[i] for i in range(len(u))])
 
 # Activation functions
-def ReLU(self, x: float) -> float:
+def ReLU(x: float) -> float:
     return max(0, x)
 
-def sigmoid(self, x: float) -> float:
+def sigmoid(x: float) -> float:
     return 1/(1+math.exp(-x))
 
 
@@ -23,13 +23,13 @@ class Neuron:
         self.gradient = [0]*len(self.weights)
 
     def update(self):
-        self.activation = dot_product(self.parent_layer(), self.weights)
+        self.activation = Neuron.activation_function(dot_product(self.parent_layer(), self.weights))
 
     def __call__(self) -> float:
         return self.activation
 
     def update_gradient(self, cost, d=2**(-16)):
-        for i in len(self.weights):
+        for i in range(len(self.weights)):
             c0 = cost()
             self.weights[i] += d
             c1 = cost()
@@ -40,4 +40,4 @@ class Neuron:
 
     def descend(self, step):
         for i in range(len(self.weights)):
-            self.weight[i] -= self.gradient * step
+            self.weights[i] -= self.gradient[i] * step
