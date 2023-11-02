@@ -34,8 +34,8 @@ def order_by_cost_influence(epsilon, func, xdata, ydata, cost):
     return sorted(data, key = lambda x: x[1])
         
 
-xdata = np.array([0.41,0.47,0.51,0.55,0.59,0.66,0.70])
-ydata = np.array([0.11557,0.13557,0.15557 ,0.17557 ,0.19557 ,0.21557,0.23557])
+xdata = np.array([0.41,0.47,0.51,0.55,0.59,0.66,0.70, 1.0])
+ydata = np.array([0.11557,0.13557,0.15557 ,0.17557 ,0.19557 ,0.21557,0.23557, 10])
 
 print(order_by_cost_influence(1, linear, xdata, ydata, cost))
 print(order_by_cost_influence(0.1, linear, xdata, ydata, cost))
