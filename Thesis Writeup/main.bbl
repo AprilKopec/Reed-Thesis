@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}
+
+\bibitem{bae22}
+Juhan Bae, Nathan Ng, Alston Lo, Marzyeh Ghassemi, and Roger Grosse.
+\newblock If influence functions are the answer, then what is the question?, 2022.
+
+\bibitem{grosse23}
+Roger Grosse, Juhan Bae, Cem Anil, Nelson Elhage, Alex Tamkin, Amirhossein Tajdini, Benoit Steiner, Dustin Li, Esin Durmus, Ethan Perez, Evan Hubinger, Kamilė Lukošiūtė, Karina Nguyen, Nicholas Joseph, Sam McCandlish, Jared Kaplan, and Samuel~R. Bowman.
+\newblock Studying large language model generalization with influence functions, 2023.
+
+\bibitem{koh20}
+Pang~Wei Koh and Percy Liang.
+\newblock Understanding black-box predictions via influence functions, 2020.
+
+\bibitem{taboga21}
+Marco Taboga.
+\newblock Parameter of a distribution, 2021.
+\newblock Accessed: 2023-11-21.
+
+\end{thebibliography}

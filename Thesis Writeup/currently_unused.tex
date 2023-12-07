@@ -1,0 +1,39 @@
+\section{Logistic Regression}
+Another type of model we might consider is \textit{logistic regression}. Logistic regression predicts the probably of an event by modelling the \textit{log-odds} of the probability as having a linear relationship with the independent variables. 
+
+Let $Y$ be a random variable which can take on values of $0$ or $1$ in a way that can be predicted using an independent variable $X$. Logistic regression uses models of the form $\P[Y=1] = \dfrac{\exp(\beta_0 + \beta_1 \cdot x)}{1+\exp(\beta_0+\beta_1\cdot x)}$. One way of better understanding this model is to consider it as predicting the logarithm of the odds of an event, rather than predicting its probability. Then we can rewrite the model as \begin{equation}
+    \logit(\P[Y = 1]) = \beta_0 + \beta_1 \cdot x
+\end{equation}
+where $\logit(p) = \ln \frac{p}{1-p}$ gives the log-odds of an event with probability $p$.
+
+This looks remarkably similar to linear regression. However, logistic regression is not exactly the same thing as linear regression on the log-odds. Rather than using mean squared error\footnote{In fact, it would be impossible to use mean squared error, because an event of probability $0$ or $1$ has a log-odds of $-\infty$ or $\infty$; using mean squared error, any model would have infinite loss.} as the loss function, logistic regression uses \textit{log loss} or \textit{cross entropy loss} which are given by $-\ln \P[Y=y]$. 
+
+The parameters $\beta_0$ and $\beta_1$ have natural interpretations. Using $\O[A] = \frac{\P[A]}{1-\P[A]}$ to represent the odds of an event $A$, we have:
+\begin{align*}
+    \O[A \given B] &= \dfrac{\P[A \given B]}{\P[\lnot A \given B]}\\
+    &= \dfrac{\P[A]\frac{\P[B \given A]}{\P[B]}}{\P[\lnot A] \frac{\P[B \given \lnot A]}{\P[B]}} \tag{Bayes' Theorem}\\
+    &= \O[A] \dfrac{\P[B \given A]}{\P[B \given \lnot A]}.
+\end{align*}
+The $\frac{\P[B\given A]}{\P[B \given \lnot A]}$ term is sometimes known as a \textit{Bayes factor}. It can be understood as a measure of how much evidence the observation $B$ provides for the hypothesis $A$ over the hypothesis $\lnot A$. If we take the logarithm of both sides of this equation, we get\footnote{This $\ln\Paren{\dfrac{\P[B | A]}{\P[B | \lnot A]}}$ term might be familiar to people who have worked with differential privacy; an algorithm $f$ is $\epsilon$–differentially private if $\ln\Paren{\dfrac{\P[f(D) \in S \given D = D_1]}{\P[f(D) \in S \given D = D_2]}} \leq \epsilon$ for all $S \subseteq \rm{Im}(f)$ and all neighboring databases $D_1, D_2$. So differential privacy can be understood as a bound on how much evidence the released data can provide for any hypothesis about your row over any other.}:
+\begin{equation}
+    \logit(\P[A|B]) = \logit(\P[A]) + \ln\Paren{\dfrac{\P[B \given A]}{\P[B \given \lnot A]}}
+\end{equation}
+
+So, at least if $\E[X]$ is normalized to $0$, you can interpret $\beta_0$ as a \textit{prior probability} that $Y$ equals $1$ (expressed in log odds) and $\beta_1$ as the logarithm of the Bayes factor for $Y=1$ over $Y=0$ which is provided per unit of $X$. [Find a better phrasing of that?]
+
+This generalizes very easily to the case where $\beta_1$ and $x$ are both vectors. 
+
+\section{Neural Networks}
+Each layer has a bunch of neurons. Each neuron has an ``activation level", which it calculates by taking the dot product of a weighting vector with all the neurons in the previous row and then applying some sort of monotonic function. If you make these very very big then they become very powerful
+
+\section{Proximal Bregman Response Function}
+Let $F: X \to \R$ be continuously differentiable, and let $p, q \in X$. Then the \textit{Bregman divergence of $F$ at $p$ from $q$}, denoted $\cl{D}_F(p, q)$, is the difference between the value of $F(p)$ and the first-order Taylor approximation of $F(p)$ around $q$. [improve phrasing] That is, 
+\begin{equation}
+    \cl{D}_F(p, q) := F(p) - \Big(F(q) + \nabla_{p-q} F (q) \Norm{p-q}\Big)
+\end{equation}
+where $\nabla_{p-q}F(q)$ is the directional derivative of $F$ in the direction towards $p$ from $q$.
+
+Given a set of model parameters $\theta^s$ and a training point $(x_m, y_m)$ whose weight has been changed by $\epsilon$, the \textit{proximal Bregman objective} is given by \begin{equation}
+\dfrac{1}{N} \Sum_{i=1}^N \cl{D}_{\cl L}(\theta(x_i), \theta^s(x_i)) + \epsilon \cl{L}(\theta(x_m)) + \frac{\lambda}{2} \Norm{\theta-\theta^s}^2
+\end{equation}
+where $\lambda$ is a (small?) positive ``damping term" [come up with a good explanation of why this is needed] and $\Norm{\theta-\theta^s}^2$ denotes the $\ell^2$-norm distance between $\theta$ and $\theta^s$.

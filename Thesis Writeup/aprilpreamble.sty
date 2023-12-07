@@ -1,0 +1,156 @@
+\ProvidesPackage{aprilpreamble}
+
+% a bunch of stuff from https://jeffe.cs.illinois.edu/pubs/tex/jeffe.sty
+% Sets
+\def\Real{\mathbb{R}}
+\def\Proj{\mathbb{P}}
+\def\Hyper{\mathbb{H}}
+\def\Integer{\mathbb{Z}}
+\def\Natural{\mathbb{N}}
+\def\Complex{\mathbb{C}}
+\def\Rational{\mathbb{Q}}
+
+% Sets
+\let\N\Natural
+\let\Q\Rational
+\let\R\Real
+\let\Z\Integer
+\let\C\Complex
+\def\Rd{\Real^d}
+\def\RP{\Real\Proj}
+\def\CP{\Complex\Proj}
+
+% easy displaystyles
+\def\Frac#1#2{{\displaystyle\frac{#1}{#2}}}
+\def\Sum{\displaystyle\sum\limits}
+\def\Prod{\displaystyle\prod\limits}
+\def\Cup{\displaystyle\bigcup\limits}
+\def\Cap{\displaystyle\bigcap\limits}
+\def\Lor{\displaystyle\bigvee\limits}
+\def\Land{\displaystyle\bigwedge\limits}
+
+\def\Wedge{\displaystyle\bigwedge\limits}
+
+\def\Lim{\displaystyle\lim\limits}
+\def\Max{\displaystyle\max\limits}
+\def\Min{\displaystyle\min\limits}
+
+\def\Int{\displaystyle\int\limits}
+\def\Iint{\displaystyle\iint\limits}
+\def\Iiint{\displaystyle\iiint\limits}
+
+
+% Scaling delimiter pairs
+\def\Floor#1{\left\lfloor #1 \right\rfloor}
+\def\Ceil#1{\left\lceil #1 \right\rceil}
+\def\Seq#1{\left\langle #1 \right\rangle}
+\def\Set#1{\left\{ #1 \right\}}
+\def\Abs#1{\left| #1 \right|}
+\def\Norm#1{\left\| #1 \right\|}
+\def\Paren#1{\left( #1 \right)}
+\def\Brack#1{\left[ #1 \right]}
+\def\Indic#1{\left[ #1 \right]}
+\def\AngBr#1{\langle #1 \rangle}
+
+
+% Better matrices
+\def\pmat(#1){\begin{pmatrix}#1\end{pmatrix}}
+\def\bmat[#1]{\begin{bmatrix}#1\end{bmatrix}}
+\def\cmat[#1]{\begin{Bmatrix}#1\end{Bmatrix}}
+\def\vmat|#1|{\begin{vmatrix}#1\end{vmatrix}}
+\def\vvmat||#1||{\begin{Vmatrix}#1\end{Vmatrix}}
+\def\mat[#1]{\begin{matrix}#1\end{matrix}}
+\def\Mat#1#2#3{\left#1\begin{matrix}#2\end{matrix}\right#3}
+
+%
+%  Macros to typeset sets like {foo|bar} with all three delimiters
+%  correctly scaled to fit.  What I *really* want is a \middle macro
+%  that acts just like \left and \right.  Grumble.
+%
+\def\Bigbar#1{\mathrel{\left|\vphantom{#1}\right.\n@space}}
+\def\Setbar#1#2{\Set{#1 \Bigbar{#1 #2} #2}}
+\def\Seqbar#1#2{\Seq{#1 \Bigbar{#1 #2} #2}}
+\def\Brackbar#1#2{\Brack{#1 \Bigbar{#1 #2} #2}}
+
+
+
+% some shorter alternate fonts
+\def\bb#1{\mathbb{#1}}
+\def\fk#1{\mathfrak{#1}}
+\def\cl#1{\mathcal{#1}}
+\def\ttt#1{\texttt{#1}}
+\def\sc#1{\mathscr{#1}}
+\def\t#1{\text{#1}}
+
+% some greek letter stuff
+\def\epsilon{\varepsilon}
+\def\vphi{\varphi}
+\def\vtheta{\vartheta}
+
+% Vector Calc operations
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\grad}{grad}
+
+\def\del{\partial}
+
+\def\delfrac#1#2{\dfrac{\del{#1}}{\del{#2}}}
+\def\delf#1#2{\dfrac{\del{#1}}{\del{#2}}}
+\def\derf#1#2{\dfrac{d#1}{d#2}}
+
+\def\Lgr{\mathscr{L}}
+
+\def\d{\mathrm{d}}
+\def\dd{\,\d}
+\def\dx{\d x}
+\def\ddx{\dd x}
+\def\dy{\d y}
+\def\ddy{\dd y}
+\def\dz{\d z}
+\def\ddz{\dd z}
+\def\dw{\d w}
+\def\ddw{\dd w}
+\def\dr{\d r}
+\def\ddr{\dd r}
+\def\dtheta{\d \theta}
+\def\ddtheta{\dd \theta}
+\def\drho{\d \rho}
+\def\ddrho{\dd \rho}
+\def\dvphi{\d \vphi}
+\def\ddvphi {\dd \vphi}
+\def\df{\d f}
+\def\ddf{\dd f}
+\def\dg{\d g}
+\def\ddg{\dd g}
+\def\dh{\d h}
+\def\ddh{\dd h}
+
+\def\D{\mathrm{D}}
+\def\DD{\,\D}
+\def\Df{\D f}
+\def\DDf{\DD f}
+\def\Dg{\D g}
+\def\DDg{\DD g}
+\def\Dh{\DD h}
+\def\Dphi {\D \phi}
+\def\DDphi {\DD \phi}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\def\P{\mathrm{P}}
+\def\E{\mathrm{E}}
+\def\CDF{\mathrm{CDF}}
+\def\PDF{\mathrm{PDF}}
+\def\Unif{\text{Unif}}
+\def\Lap{\text{Lap}}
+\def\Geom{\text{Geom}}
+
+\def\given{\mathbin{|}}
+
+\def\logit{\mathrm{logit}}
+
+\def\O{\mathrm{O}}
+
+\usepackage[utf8]{inputenc}
+\DeclareMathOperator{\len}{length}
+\DeclareMathOperator{\vol}{volume}
