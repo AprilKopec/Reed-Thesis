@@ -1,9 +1,12 @@
 from utils import cos_sim, idf
 from transformers import GPTNeoForCausalLM, GPT2Tokenizer
+from datasets import load_dataset
 
 model_name = "roneneldan/TinyStories-33M"
 tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 model = GPTNeoForCausalLM.from_pretrained(model_name)
+
+dataset = load_dataset("roneneldan/TinyStories")
 
 
 queries = ['''One day, a little girl named Lily found a needle in her room. She knew it was sharp and could hurt her. Lily wanted to show her mom the needle, so she went to find her. Lily found her mom in the kitchen. "Mom, look what I found!" she said. Her mom looked at the needle and said, "Oh no, Lily! That's a terrible needle. It can hurt you. Let's put it away." Lily and her mom put the needle in a safe place. They found a soft cloth and put it away. Lily's mom said, "Now, let's not play with the needle. Let's play with your toys instead." Lily smiled and they played together happily.''',

@@ -1,5 +1,6 @@
 from neuron import Neuron
 from layer import Layer, Input_Layer
+import random
 
 class Neural_Net:
     def __init__(self, input_parser, input_size, output_size, hidden_layer_count, layer_size, cost_function):
@@ -35,6 +36,7 @@ class Neural_Net:
             layer.descend(step)
 
     def epoch(self, training_data, d=2**(-8), step=2**(-8)):
-        for input in training_data:
+        for i in range(100):
+            input = random.choice(training_data)
             self.update_gradient(input, d)
             self.descend(step)
