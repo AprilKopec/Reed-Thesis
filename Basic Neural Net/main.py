@@ -1,9 +1,8 @@
 from neural_net import Neural_Net
 from training_data import data, input_parser, validation
-from math import sqrt
 
 def cost_function(output, true_value):
-    return sqrt((output[0]-true_value[0]/100.0)**2 + (output[1]-true_value[1]/100.0)**2 + (output[2]-true_value[2]/100.0)**2)
+    return (output[0]-true_value[0]/100.0)**2 + (output[1]-true_value[1]/100.0)**2 + (output[2]-true_value[2]/100.0)**2
 
 def test1():
     final_costs = []

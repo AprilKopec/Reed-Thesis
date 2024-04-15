@@ -18,7 +18,7 @@ def cos_sim(u, v):
     else:
         return np.dot(u, v)/(np.linalg.norm(u)*np.linalg.norm(v))
 
-with open('token_counts.pkl', 'rb') as f:
+with open('Filtering/token_counts.pkl', 'rb') as f:
         token_counts = pickle.load(f)
 
 def idf(t):
