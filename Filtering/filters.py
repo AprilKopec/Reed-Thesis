@@ -33,4 +33,10 @@ def test_score(Q, D):
     total /= len(D)
     return 1000*total
 
-print([(tf_idf_score(query, d), tokenizer.decode(d)) for d in documents])
+x = [(tf_idf_score(query, d), tokenizer.decode(d)) for d in documents]
+x.sort()
+print(x)
+
+y = [(test_score(query, d), tokenizer.decode(d)) for d in documents]
+y.sort()
+print(y)

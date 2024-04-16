@@ -14,7 +14,7 @@ def sigmoid(x: float) -> float:
 
 
 class Neuron:
-    activation_function = ReLU
+    activation_function = sigmoid
 
     def __init__(self, parent_layer: list):
         self.weights = [1-(2*rand.random()) for i in range(len(parent_layer)+1)]

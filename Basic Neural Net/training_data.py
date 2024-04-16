@@ -8,6 +8,12 @@ validation = pd.read_csv('Basic Neural Net\\validation.csv')
 validation = validation.values.tolist()
 validation = [(d[:5], d[5:]) for d in validation]
 
+def cost_function(output, true_value, test=None):
+    if test is not None :
+       return (output[test] - true_value[test]/100.0)**2
+    else:
+        return (output[0]-true_value[0]/100.0)**2 + (output[1]-true_value[1]/100.0)**2 + (output[2]-true_value[2]/100.0)**2
+
 def input_parser(x):
     output = [0.0] * 17
     match x[0]:
