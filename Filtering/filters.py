@@ -22,7 +22,7 @@ def tf_idf_score(Q, D):
     total = 0
     for t in Q:
         total += idf(t) * (t in D)
-    return 5/3 * total
+    return total
 
 def test_score(Q, D):
     total = 0
@@ -33,10 +33,17 @@ def test_score(Q, D):
     total /= len(D)
     return 1000*total
 
-x = [(tf_idf_score(query, d), tokenizer.decode(d)) for d in documents]
-x.sort()
-print(x)
 
-y = [(test_score(query, d), tokenizer.decode(d)) for d in documents]
-y.sort()
-print(y)
+
+#with open("Filtering/random_sample.text", "w") as f:
+    x = [(tf_idf_score(query, d), tokenizer.decode(d)) for d in documents]
+    x.sort()
+    print(x)
+    f.write(str(x))
+
+    y = [(test_score(query, d), tokenizer.decode(d)) for d in documents]
+    y.sort()
+    print(y)
+    f.write(str(y))
+
+print(tf_idf_score(query, query))

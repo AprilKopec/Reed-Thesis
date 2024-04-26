@@ -56,3 +56,10 @@ def IDF_Calc_Constants():
     print(document_count)
     with open('token_counts.pkl', 'wb') as file:
         pickle.dump(token_counts, file)
+
+def split_string_by_tokens(s):
+    tokens = tokenizer.encode(s, add_special_tokens=False)
+    print([tokenizer.decode(t) for t in tokens])
+
+def embedding_vector(token):
+    return tokenizer.encode(token, add_special_tokens=False)[0]
